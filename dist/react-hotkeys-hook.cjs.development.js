@@ -447,9 +447,7 @@ function useHotkeys(keys, callback, options, dependencies) {
         listener(event, true);
       }
     };
-    // @ts-ignore
     (ref.current || (_options == null ? void 0 : _options.document) || document).addEventListener('keyup', handleKeyUp);
-    // @ts-ignore
     (ref.current || (_options == null ? void 0 : _options.document) || document).addEventListener('keydown', handleKeyDown);
     if (proxy) {
       parseKeysHookInput(keys, memoisedOptions == null ? void 0 : memoisedOptions.splitKey).forEach(function (key) {
@@ -457,9 +455,7 @@ function useHotkeys(keys, callback, options, dependencies) {
       });
     }
     return function () {
-      // @ts-ignore
       (ref.current || (_options == null ? void 0 : _options.document) || document).removeEventListener('keyup', handleKeyUp);
-      // @ts-ignore
       (ref.current || (_options == null ? void 0 : _options.document) || document).removeEventListener('keydown', handleKeyDown);
       if (proxy) {
         parseKeysHookInput(keys, memoisedOptions == null ? void 0 : memoisedOptions.splitKey).forEach(function (key) {
