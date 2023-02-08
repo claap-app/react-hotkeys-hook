@@ -24,16 +24,17 @@ export function isHotkeyEnabledOnTag({ target }: KeyboardEvent, enabledOnTags: F
   const targetTagName = target && (target as HTMLElement).tagName
 
   // Enable hotkeys on components with enableHotkeys data property
-  const enableHotkeys = (
-    !!(target && (target as HTMLInputElement).dataset.enableHotkeys)
-    || !!(target && (target as HTMLInputElement)?.parentElement?.dataset.enableHotkeys)
-  )
+  const enableHotkeys =
+    !!(target && (target as HTMLInputElement).dataset.enableHotkeys) ||
+    !!(target && (target as HTMLInputElement)?.parentElement?.dataset.enableHotkeys)
   if (enableHotkeys) {
     return true
   }
 
   if (enabledOnTags instanceof Array) {
-    return Boolean(targetTagName && enabledOnTags && enabledOnTags.some(tag => tag.toLowerCase() === targetTagName.toLowerCase()))
+    return Boolean(
+      targetTagName && enabledOnTags && enabledOnTags.some((tag) => tag.toLowerCase() === targetTagName.toLowerCase())
+    )
   }
 
   return Boolean(targetTagName && enabledOnTags && enabledOnTags === true)
@@ -42,7 +43,7 @@ export function isHotkeyEnabledOnTag({ target }: KeyboardEvent, enabledOnTags: F
 export function isScopeActive(activeScopes: string[], scopes?: Scopes): boolean {
   if (activeScopes.length === 0 && scopes) {
     console.warn(
-      'A hotkey has the "scopes" option set, however no active scopes were found. If you want to use the global scopes feature, you need to wrap your app in a <HotkeysProvider>',
+      'A hotkey has the "scopes" option set, however no active scopes were found. If you want to use the global scopes feature, you need to wrap your app in a <HotkeysProvider>'
     )
 
     return true
@@ -52,10 +53,14 @@ export function isScopeActive(activeScopes: string[], scopes?: Scopes): boolean 
     return true
   }
 
-  return activeScopes.some(scope => scopes.includes(scope)) || activeScopes.includes('*')
+  return activeScopes.some((scope) => scopes.includes(scope)) || activeScopes.includes('*')
 }
 
-export const isHotkeyMatchingKeyboardEvent = (e: KeyboardEvent, hotkey: Hotkey, ignoreModifiers: boolean = false): boolean => {
+export const isHotkeyMatchingKeyboardEvent = (
+  e: KeyboardEvent,
+  hotkey: Hotkey,
+  ignoreModifiers: boolean = false
+): boolean => {
   const { alt, meta, mod, shift, ctrl, keys } = hotkey
   const { key: pressedKeyUppercase, code, ctrlKey, metaKey, shiftKey, altKey } = e
 
